@@ -115,3 +115,64 @@ public class Trial {
                 + (nano_endTime - nano_startTime));
     }
 }
+
+/*
+SAMPLE MAZE:
+    xxxxxxxxxxx
+    + xxxx xxxx
+    x         x
+    xxxxxxxxx x
+    x         -
+    xxxxxxxxxxx
+
+ANSWER KEY:
+    xxxxxxxxxxx
+    ++xxxx.xxxx
+    x+++++++++x
+    xxxxxxxxx+x
+    x........+-
+    xxxxxxxxxxx
+
+1) Try finding path to the left, go left. If not, try going straight. If not, try going right. If none, print 'no path found'
+1E) Scan for all directions, if more than one is found then trigger a 'choice'. If not, go in the only direction and mark it with (+)s
+
+2) If 'choice' is triggered, try going in the first direction found and mark it with pluses(+),
+    if it's not a path, go back to the choice spot and mark that path with dots (.).
+
+3) If the path is fine, repeat.
+
+
+1) find path:
+    -if one found, trigger function with an old loc & direction
+    - if multiple is found:
+        - trigger choice function to mark the last trusted loc and that function should know the wrong and right paths taken
+        - find path and repeat
+
+
+2) Taking Choices, Recursion, and Back-Tracking:
+    - keep going until you find a choice, take the first option in the choices, keep following until you hit a dead end, then back track following your trails of +s
+    until you reach the last trusted location of the choice making, then try the second option. All of this while recursion-ing the choice making because you might
+    be hit with another choice before finishing the first set of choices.
+
+Functionalities:
+    Finding the entrance
+    triggering a Choice
+    laying +s and .s where the maze goes.
+    Something to know where I am at all times
+
+Dead ends:
+    can't go nowhere? I mark it as a dead end, the place I am in -> "."
+    Back track -> check for a choice.. no choices?, back track with a "."
+    Until I find another option where I don't backtrack no more but go in that direction
+
+Found exit:
+    Each + would return true to the + behind it as a finale to the line of recursions called beforehand.
+
+Base case:
+    Finding the exit (cx, cy)
+
+
+*Keep an array of spots you are going but unsure of, when made sure its a dad end, turn all these spots (indexes into .s)
+
+
+ */
